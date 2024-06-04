@@ -46,4 +46,22 @@ class Booking(webdriver.Chrome):
         self.find_element(By.XPATH, f"//span[@data-date='{check_out}']").click()
 
     def select_occupancy(self, adults):
-        self.find_element(By.CLASS_NAME, "d777d2b248").click()
+        if adults != 2:
+            self.find_element(By.CLASS_NAME, "d777d2b248").click()
+            value = int(self.find_element(By.ID, "group_adults").get_attribute("value"))
+            print(type(value))
+            if adults > 2:
+                while value != adults:
+                    self.find_element(By.XPATH, '//*[@id=":rf:"]/div/div[1]/div[2]/button[2]').click()
+                    value += 1
+            if adults < 2:
+                while value != adults:
+                    self.find_element(By.XPATH, '//*[@id=":rf:"]/div/div[1]/div[2]/button[1]').click()
+                    value -= 1
+
+    def search_click(self):
+        self.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
+
+
+
+

@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.options import Options
 import booking.cons as cons
 from selenium.webdriver.common.by import By
 import time
+from booking.filters import filters
 
 options = Options()
 options.add_experimental_option("detach", True)
@@ -50,7 +51,7 @@ class Booking(webdriver.Chrome):
         if adults != 2:
             self.find_element(By.CLASS_NAME, "d777d2b248").click()
             value = int(self.find_element(By.ID, "group_adults").get_attribute("value"))
-            print(type(value))
+            # print(type(value))
             if adults > 2:
                 while value != adults:
                     self.find_element(By.XPATH, '//*[@id=":rf:"]/div/div[1]/div[2]/button[2]').click()
@@ -62,3 +63,7 @@ class Booking(webdriver.Chrome):
 
     def search_click(self):
         self.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
+
+    def filters(self):
+        filter = filters(driver=self)
+        filter.star_rating()

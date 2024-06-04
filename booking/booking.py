@@ -10,6 +10,7 @@ import time
 options = Options()
 options.add_experimental_option("detach", True)
 
+
 class Booking(webdriver.Chrome):
     def __init__(self, teardown=False):
         self.teardown = teardown
@@ -22,7 +23,7 @@ class Booking(webdriver.Chrome):
             self.quit()
 
     def first_page(self, currency=None):
-        if currency != None:
+        if currency is not None:
             self.get(cons.BASE + "selected_currency=" + currency)
         else:
             self.get(cons.BASE)
@@ -61,7 +62,3 @@ class Booking(webdriver.Chrome):
 
     def search_click(self):
         self.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
-
-
-
-

@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.options import Options
 import booking.cons as cons
 from selenium.webdriver.common.by import By
 import time
-from booking.filters import filters
+from booking.filters import Filters
 
 options = Options()
 options.add_experimental_option("detach", True)
@@ -65,5 +65,6 @@ class Booking(webdriver.Chrome):
         self.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
 
     def filters(self):
-        filter = filters(driver=self)
-        filter.star_rating()
+        filter = Filters(driver=self)
+        time.sleep(2)
+        filter.star_rating(0, 1, 3)

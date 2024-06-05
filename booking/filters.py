@@ -1,15 +1,14 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions
+import time
 
-class filters:
-    def __init__(self, driver:WebDriver):
+class Filters:
+    def __init__(self, driver: WebDriver):
         self.driver = driver
 
-    def star_rating(self):
-        self.driver.find_element(By.XPATH, '//*[@id="filter_group_class_:r18:"]/div[5]/label/span[2]').click()
-
-
-
-
-
-
+    #values available 0-5
+    def star_rating(self, *ratings):
+        for element in ratings:
+            self.driver.find_element(By.CSS_SELECTOR, f'input[name="class={element}"][value="class={element}"]').click()

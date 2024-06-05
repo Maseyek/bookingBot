@@ -66,5 +66,6 @@ class Booking(webdriver.Chrome):
 
     def filters(self):
         filter = Filters(driver=self)
+        #sleep temporary solution, change for expected condition: loaded page
         time.sleep(2)
         filter.star_rating(0, 1, 3)

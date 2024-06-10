@@ -8,14 +8,16 @@ from selenium.webdriver.common.by import By
 import time
 from booking.filters import Filters
 
-options = Options()
-options.add_experimental_option("detach", True)
+
 
 
 class Booking(webdriver.Chrome):
     def __init__(self, teardown=False):
         self.teardown = teardown
-        super(Booking, self).__init__()
+        options = Options()
+        # options.add_experimental_option("detach", True) # To keep chrome alive after finishing all tasks
+        options.add_experimental_option('excludeSwitches', ['enable-logging']) # Logs are disabled in CLI
+        super(Booking, self).__init__(options=options)
         self.implicitly_wait(15)
         self.maximize_window()
 

@@ -7,8 +7,7 @@ import booking.cons as cons
 from selenium.webdriver.common.by import By
 import time
 from booking.filters import Filters
-
-
+from booking.parsing_results import ParsingResults
 
 
 class Booking(webdriver.Chrome):
@@ -16,7 +15,7 @@ class Booking(webdriver.Chrome):
         self.teardown = teardown
         options = Options()
         # options.add_experimental_option("detach", True) # To keep chrome alive after finishing all tasks
-        options.add_experimental_option('excludeSwitches', ['enable-logging']) # Logs are disabled in CLI
+        options.add_experimental_option('excludeSwitches', ['enable-logging'])  # Logs are disabled in CLI
         super(Booking, self).__init__(options=options)
         self.implicitly_wait(15)
         self.maximize_window()
@@ -67,7 +66,14 @@ class Booking(webdriver.Chrome):
         self.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
 
     def filters(self):
-        filter = Filters(driver=self)
-        #sleep temporary solution, change for expected condition: loaded page
+        adds = Filters(driver=self)
+        # sleep temporary solution, change for expected condition: loaded page
         time.sleep(2)
-        filter.star_rating(0, 1, 3)
+        adds.star_rating(0, 1, 3)
+
+    def results(self):
+
+        page_results = self.find_elements(By.CSS_SELECTOR, 'div[data-testid="property-card"]')
+        print(type(page_results))
+        parse = ParsingResults(page_results)
+        parse.title()

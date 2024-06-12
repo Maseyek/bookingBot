@@ -8,7 +8,7 @@ class Filters:
     def __init__(self, driver: WebDriver):
         self.driver = driver
 
-    #values available 0-5
+    # values available 0-5
     def star_rating(self, *ratings):
         for element in ratings:
             self.driver.find_element(By.CSS_SELECTOR, f'input[name="class={element}"][value="class={element}"]').click()

@@ -11,6 +11,7 @@ try:
         bot.select_occupancy(1)
         bot.search_click()
         bot.filters()
+        bot.results()
 
         time.sleep(5)
 except Exception as e:

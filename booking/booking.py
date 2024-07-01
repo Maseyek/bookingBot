@@ -50,6 +50,8 @@ class Booking(webdriver.Chrome):
 
     def select_occupancy(self, adults):
         if adults != 2:
+            self.find_element(By.CSS_SELECTOR, 'button[data-testid="occupancy-config"]').click()
+            time.sleep(2)
             self.find_element(By.CLASS_NAME, "d777d2b248").click()
             value = int(self.find_element(By.ID, "group_adults").get_attribute("value"))
             # print(type(value))
